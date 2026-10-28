@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ error_title }} ({{ error_code }}) — CollegeConnect{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="confirmation-wrapper" style="max-width: 540px; margin-top: 4rem;">
+    <div class="card" style="padding: 3rem 2rem; text-align: center;">
+      <div style="width: 64px; height: 64px; border-radius: 50%; background-color: #FEF2F2; color: #EF4444; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      
+      <div style="font-size: 0.85rem; font-weight: 700; color: #EF4444; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+        Error {{ error_code }}
+      </div>
+      
+      <h1 class="form-title" style="margin-bottom: 0.75rem;">{{ error_title }}</h1>
+      <p style="color: #64748B; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+        {{ error_message }}
+      </p>
+
+      <div>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">
+          &larr; Return to Homepage
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

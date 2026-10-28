@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <defs>
+    <linearGradient id="hkBg" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090D16"/>
+      <stop offset="50%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="laptopGlow" x1="150" y1="50" x2="250" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#hkBg)"/>
+
+  <!-- Matrix/Code streams in background -->
+  <text x="30" y="30" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.3">01000011 01001111 01000100 01000101</text>
+  <text x="30" y="50" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.3">const sprint = async () =&gt; { await build(); }</text>
+  <text x="30" y="70" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.2">git commit -m "feat: 24hr build winning prototype"</text>
+  <text x="30" y="150" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.2">docker run -d -p 8080:8080 hackathon/ai-app</text>
+  <text x="30" y="170" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.25">import tensorflow as tf; model.fit(epochs=100)</text>
+
+  <!-- Laptop Outline with glow -->
+  <rect x="135" y="45" width="130" height="85" rx="6" fill="#0F172A" stroke="#60A5FA" stroke-width="2"/>
+  <rect x="142" y="52" width="116" height="71" rx="3" fill="#020617"/>
+
+  <!-- Big Code symbol on screen </ > -->
+  <text x="200" y="96" font-family="'Consolas', monospace" font-weight="900" font-size="34" fill="#38BDF8" text-anchor="middle">&lt;/&gt;</text>
+
+  <!-- Laptop Base -->
+  <path d="M115,130 L285,130 L275,142 L125,142 Z" fill="#334155" stroke="#64748B" stroke-width="1.5"/>
+  <rect x="180" y="132" width="40" height="3" rx="1.5" fill="#94A3B8"/>
+
+  <!-- Developer hands / keyboard glow -->
+  <ellipse cx="200" cy="148" rx="80" ry="8" fill="#38BDF8" opacity="0.3"/>
+
+  <!-- Title Banner -->
+  <rect x="100" y="155" width="200" height="28" rx="14" fill="#1E293B" stroke="#4F46E5" stroke-width="1.5"/>
+  <text x="200" y="174" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="14" fill="#EEF2FF" text-anchor="middle" letter-spacing="1.5">CODESPRINT HACKATHON</text>
+</svg>
+

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" fill="none">
+  <defs>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="520" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E1B4B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4F46E5" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="260" y1="40" x2="260" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#312E81" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Big circular glow behind tower -->
+  <circle cx="340" cy="140" r="130" fill="url(#glowGrad)"/>
+
+  <!-- Stars -->
+  <circle cx="120" cy="50" r="1.5" fill="#E0E7FF" opacity="0.6"/>
+  <circle cx="180" cy="80" r="2" fill="#E0E7FF" opacity="0.8"/>
+  <circle cx="280" cy="35" r="1.5" fill="#E0E7FF" opacity="0.5"/>
+  <circle cx="420" cy="65" r="2" fill="#E0E7FF" opacity="0.7"/>
+  <polygon points="460,40 462,45 467,46 463,49 464,54 460,51 456,54 457,49 453,46 458,45" fill="#FDE047" opacity="0.9"/>
+  <polygon points="150,110 151,113 154,114 152,116 153,119 150,117 147,119 148,116 146,114 149,113" fill="#A5B4FC" opacity="0.8"/>
+
+  <!-- University Building Silhouette -->
+  <!-- Left wing -->
+  <rect x="220" y="170" width="80" height="90" rx="3" fill="#2E3856" opacity="0.9"/>
+  <rect x="235" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="255" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="275" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="235" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="255" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="275" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+
+  <!-- Right wing -->
+  <rect x="380" y="170" width="80" height="90" rx="3" fill="#2E3856" opacity="0.9"/>
+  <rect x="395" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="415" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="435" y="185" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="395" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="415" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+  <rect x="435" y="215" width="12" height="20" rx="2" fill="#6366F1" opacity="0.6"/>
+
+  <!-- Center Clock Tower -->
+  <rect x="295" y="110" width="90" height="150" rx="4" fill="#3B4870" opacity="0.95"/>
+  <!-- Tower Spire / Roof -->
+  <polygon points="340,65 300,110 380,110" fill="#26304D"/>
+  <line x1="340" y1="50" x2="340" y2="65" stroke="#FBBF24" stroke-width="2.5"/>
+  <polygon points="340,50 355,55 340,60" fill="#FBBF24"/>
+  <!-- Clock face -->
+  <circle cx="340" cy="135" r="16" fill="#F8FAFC" opacity="0.9"/>
+  <circle cx="340" cy="135" r="14" fill="#1E293B"/>
+  <circle cx="340" cy="135" r="1.5" fill="#F8FAFC"/>
+  <line x1="340" y1="135" x2="340" y2="126" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="340" y1="135" x2="347" y2="135" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Tower Windows and Arch Entrance -->
+  <path d="M325,170 C325,162 355,162 355,170 L355,200 L325,200 Z" fill="#60A5FA" opacity="0.7"/>
+  <path d="M330,225 C330,215 350,215 350,225 L350,260 L330,260 Z" fill="#1E1B4B"/>
+
+  <!-- Campus Trees -->
+  <circle cx="215" cy="220" r="30" fill="#1E293B" opacity="0.85"/>
+  <circle cx="200" cy="230" r="22" fill="#2A3859" opacity="0.9"/>
+  <circle cx="475" cy="225" r="32" fill="#1E293B" opacity="0.85"/>
+  <circle cx="490" cy="235" r="24" fill="#2A3859" opacity="0.9"/>
+
+  <!-- Crowd of graduating students silhouette -->
+  <path d="M120,280 C120,250 140,245 155,245 C170,245 190,250 190,280 Z" fill="#0F172A" opacity="0.9"/>
+  <circle cx="155" cy="233" r="11" fill="#0F172A"/>
+
+  <path d="M175,280 C175,245 200,240 215,240 C230,240 255,245 255,280 Z" fill="#18223C"/>
+  <circle cx="215" cy="228" r="12" fill="#18223C"/>
+
+  <path d="M240,280 C240,240 265,235 285,235 C305,235 330,240 330,280 Z" fill="#0F172A"/>
+  <circle cx="285" cy="222" r="13" fill="#0F172A"/>
+
+  <path d="M315,280 C315,238 340,232 360,232 C380,232 405,238 405,280 Z" fill="#18223C"/>
+  <circle cx="360" cy="220" r="13" fill="#18223C"/>
+
+  <path d="M390,280 C390,242 410,238 425,238 C440,238 460,242 460,280 Z" fill="#0F172A"/>
+  <circle cx="425" cy="225" r="12" fill="#0F172A"/>
+
+  <path d="M445,280 C445,248 465,244 480,244 C495,244 515,248 515,280 Z" fill="#18223C"/>
+  <circle cx="480" cy="232" r="11" fill="#18223C"/>
+
+  <!-- "Big Events, Bigger Dreams" artistic callout -->
+  <g transform="rotate(-6 430 70)">
+    <text x="360" y="55" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-style="italic" font-size="24" fill="#C7D2FE" opacity="0.95" letter-spacing="0.5">Big Events</text>
+    <text x="375" y="80" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-style="italic" font-size="22" fill="#A5B4FC" opacity="0.9" letter-spacing="0.5">Bigger Dreams</text>
+  </g>
+</svg>
+

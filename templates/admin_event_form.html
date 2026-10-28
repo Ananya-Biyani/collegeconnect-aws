@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if is_edit %}Edit Event: {{ event.title }}{% else %}Create New Event{% endif %} — CollegeConnect
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-layout-container" style="max-width: 720px;">
+    <div class="form-card">
+      <div class="form-header">
+        <h1 class="form-title">
+          {% if is_edit %}Edit Campus Event{% else %}Create New Campus Event{% endif %}
+        </h1>
+        <p class="form-subtitle">
+          {% if is_edit %}
+            Update event schedules, location, and seat capacities
+          {% else %}
+            Publish a new workshop, symposium, or fest to the student portal
+          {% endif %}
+        </p>
+      </div>
+
+      {% if is_edit %}
+        <div class="alert alert-info" style="font-size: 0.875rem;">
+          <svg class="alert-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <div>
+            <strong>Active Bookings Notice:</strong> This event currently has <strong>{{ event.registered_count }}</strong> registered student(s). Seat capacity cannot be reduced below this number.
+          </div>
+        </div>
+      {% endif %}
+
+      <form action="{% if is_edit %}{{ url_for('admin_edit_event', event_id=event.id) }}{% else %}{{ url_for('admin_create_event') }}{% endif %}"
+            method="POST"
+            data-disable-on-submit="true">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title" class="form-label">Event Title <span class="required-star">*</span></label>
+          <input type="text"
+                 id="title"
+                 name="title"
+                 value="{{ form_data.title }}"
+                 placeholder="e.g. AI & Robotics Symposium 2026"
+                 class="form-control"
+                 required>
+        </div>
+
+        <!-- Row: Category & Capacity -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="category" class="form-label">Category <span class="required-star">*</span></label>
+            <select id="category" name="category" class="form-control" required>
+              <option value="Technical" {% if form_data.category == 'Technical' %}selected{% endif %}>Technical</option>
+              <option value="Cultural" {% if form_data.category == 'Cultural' %}selected{% endif %}>Cultural</option>
+              <option value="Workshop" {% if form_data.category == 'Workshop' %}selected{% endif %}>Workshop</option>
+              <option value="Hackathon" {% if form_data.category == 'Hackathon' %}selected{% endif %}>Hackathon</option>
+              <option value="Seminar" {% if form_data.category == 'Seminar' %}selected{% endif %}>Seminar</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="capacity" class="form-label">Seat Capacity <span class="required-star">*</span></label>
+            <input type="number"
+                   id="capacity"
+                   name="capacity"
+                   value="{{ form_data.capacity }}"
+                   min="{% if is_edit %}{{ event.registered_count }}{% else %}1{% endif %}"
+                   class="form-control"
+                   required>
+            <div class="form-hint">
+              {% if is_edit %}
+                Minimum {{ event.registered_count }} (current registrations)
+              {% else %}
+                Total seats available
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Row: Date & Time -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label for="date" class="form-label">Event Date <span class="required-star">*</span></label>
+            <input type="date"
+                   id="date"
+                   name="date"
+                   value="{{ form_data.date }}"
+                   class="form-control"
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label for="time" class="form-label">Time Schedule</label>
+            <input type="text"
+                   id="time"
+                   name="time"
+                   value="{{ form_data.time }}"
+                   placeholder="e.g. 10:00 AM - 04:00 PM"
+                   class="form-control">
+          </div>
+        </div>
+
+        <!-- Venue -->
+        <div class="form-group">
+          <label for="venue" class="form-label">Venue / Hall <span class="required-star">*</span></label>
+          <input type="text"
+                 id="venue"
+                 name="venue"
+                 value="{{ form_data.venue }}"
+                 placeholder="e.g. Main Auditorium, Innovation Center"
+                 class="form-control"
+                 required>
+        </div>
+
+        <!-- Registration Deadline -->
+        <div class="form-group">
+          <label for="registration_deadline" class="form-label">Registration Deadline</label>
+          <input type="date"
+                 id="registration_deadline"
+                 name="registration_deadline"
+                 value="{{ form_data.registration_deadline }}"
+                 class="form-control">
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description" class="form-label">Description &amp; Highlights</label>
+          <textarea id="description"
+                    name="description"
+                    rows="4"
+                    class="form-control"
+                    placeholder="Provide a compelling overview of what students will experience, learn, and win...">{{ form_data.description }}</textarea>
+        </div>
+
+        <!-- Is Open Checkbox -->
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0;">
+          <input type="checkbox"
+                 id="is_open"
+                 name="is_open"
+                 value="1"
+                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #4F46E5;"
+                 {% if form_data.is_open %}checked{% endif %}>
+          <label for="is_open" style="font-weight: 600; color: #1E1B4B; cursor: pointer;">
+            Open for Student Registrations
+          </label>
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="flex: 2;">
+            {% if is_edit %}Save Changes &rarr;{% else %}Publish Event &rarr;{% endif %}
+          </button>
+          <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary" style="flex: 1;">
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Confirmed! — CollegeConnect{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="confirmation-wrapper">
+    <div class="confirmation-card">
+      <!-- Success Envelope Illustration (from user reference image) -->
+      <img src="{{ url_for('static', filename='images/success-envelope.svg') }}"
+           alt="Registration Successful Envelope"
+           class="confirmation-illustration">
+
+      <h1 class="confirmation-title">Registration Successful!</h1>
+      <p class="confirmation-subtitle">
+        Your seat has been reserved. Keep your reference code handy for entry at the event venue.
+      </p>
+
+      <!-- Unique Reference Code Box -->
+      <div class="reference-card">
+        <span class="ref-label">Registration Reference Code</span>
+        <span class="ref-code" id="registrationRefCode">{{ registration.reference_id }}</span>
+        <button type="button" class="ref-copy-btn" id="copyRefBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copy Reference
+        </button>
+      </div>
+
+      <!-- Registration Summary Details Table -->
+      <div class="details-summary-box">
+        <div class="summary-row">
+          <span class="summary-label">Student Name:</span>
+          <span class="summary-value">{{ registration.student_name }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">College Email:</span>
+          <span class="summary-value">{{ registration.email }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Department:</span>
+          <span class="summary-value">{{ registration.department }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Academic Year:</span>
+          <span class="summary-value">{{ registration.academic_year }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Event:</span>
+          <span class="summary-value">{{ registration.event_title }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Event Date &amp; Time:</span>
+          <span class="summary-value">{{ registration.event_date }} &bull; {{ registration.event_time }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Venue:</span>
+          <span class="summary-value">{{ registration.event_venue }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Status:</span>
+          <span class="summary-value" style="color: #10B981; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            {{ registration.status }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Action Navigation Buttons -->
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ url_for('my_registrations', email=registration.email) }}" class="btn btn-primary">
+          View My Registrations &rarr;
+        </a>
+        <a href="{{ url_for('index') }}#upcoming-events" class="btn btn-secondary">
+          Back to Events
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

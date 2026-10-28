@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.vscode/
+.idea/
+
+# Cloud/deployment secrets and data
+.env
+*.pem
+*.key
+*.db
+*.sqlite3
+/venv/
+/.venv/

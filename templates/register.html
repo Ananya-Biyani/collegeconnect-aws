@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Register for {{ event.title }} — CollegeConnect{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form-layout-container">
+    <div class="form-card">
+      <!-- Form Header -->
+      <div class="form-header">
+        <h1 class="form-title">Event Registration</h1>
+        <p class="form-subtitle">Fill in your student information to reserve your seat</p>
+      </div>
+
+      <!-- Event Summary Banner -->
+      <div class="event-preview-banner">
+        <div>
+          <div class="preview-event-title">{{ event.title }}</div>
+          <div class="preview-event-meta">
+            <span>📅 {{ event.display_date }}</span>
+            <span>📍 {{ event.venue }}</span>
+          </div>
+        </div>
+        <div>
+          {% if event.available_seats == 0 %}
+            <span class="preview-seats-pill" style="color: #EF4444; border-color: #FECACA;">Seats Full</span>
+          {% else %}
+            <span class="preview-seats-pill">{{ event.available_seats }} Seats Available</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if not event.can_register %}
+        <div class="alert alert-error">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <strong>Notice:</strong>
+            {% if not event.is_open %}
+              Registration for this event is closed by the administrator.
+            {% else %}
+              This event has reached full capacity. No more seats can be reserved.
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Registration Form -->
+      <form action="{{ url_for('register', event_id=event.id) }}"
+            method="POST"
+            data-disable-on-submit="true"
+            novalidate>
+        <!-- CSRF Token -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <!-- Student Full Name -->
+        <div class="form-group">
+          <label for="student_name" class="form-label">
+            Student Full Name <span class="required-star">*</span>
+          </label>
+          <input type="text"
+                 id="student_name"
+                 name="student_name"
+                 value="{{ form_data.student_name }}"
+                 placeholder="e.g. Alex Morgan"
+                 class="form-control {% if field_errors.student_name %}is-invalid{% endif %}"
+                 required
+                 {% if not event.can_register %}disabled{% endif %}>
+          {% if field_errors.student_name %}
+            <div class="field-error-msg">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              {{ field_errors.student_name }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- College Email Address -->
+        <div class="form-group">
+          <label for="college_email" class="form-label">
+            College Email Address <span class="required-star">*</span>
+          </label>
+          <input type="email"
+                 id="college_email"
+                 name="college_email"
+                 value="{{ form_data.college_email }}"
+                 placeholder="e.g. alex.morgan@college.edu"
+                 class="form-control {% if field_errors.college_email %}is-invalid{% endif %}"
+                 required
+                 {% if not event.can_register %}disabled{% endif %}>
+          <div class="form-hint">Used for your registration confirmation and lookup. Only one registration per event is allowed.</div>
+          {% if field_errors.college_email %}
+            <div class="field-error-msg">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              {{ field_errors.college_email }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Department Dropdown -->
+        <div class="form-group">
+          <label for="department" class="form-label">
+            Academic Department <span class="required-star">*</span>
+          </label>
+          <select id="department"
+                  name="department"
+                  class="form-control {% if field_errors.department %}is-invalid{% endif %}"
+                  required
+                  {% if not event.can_register %}disabled{% endif %}>
+            <option value="" disabled {% if not form_data.department %}selected{% endif %}>Select your academic department</option>
+            {% for dept in allowed_departments %}
+              <option value="{{ dept }}" {% if form_data.department == dept %}selected{% endif %}>
+                {{ dept }}
+              </option>
+            {% endfor %}
+          </select>
+          {% if field_errors.department %}
+            <div class="field-error-msg">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              {{ field_errors.department }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Academic Year (Optional) -->
+        <div class="form-group">
+          <label for="academic_year" class="form-label">
+            Academic Year <span style="font-weight: 400; color: #64748B;">(Optional)</span>
+          </label>
+          <select id="academic_year"
+                  name="academic_year"
+                  class="form-control"
+                  {% if not event.can_register %}disabled{% endif %}>
+            <option value="" {% if not form_data.academic_year %}selected{% endif %}>Select your study year (Optional)</option>
+            {% for yr in allowed_academic_years %}
+              <option value="{{ yr }}" {% if form_data.academic_year == yr %}selected{% endif %}>
+                {{ yr }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Submit & Actions -->
+        <div class="form-actions">
+          {% if event.can_register %}
+            <button type="submit" class="btn btn-primary" style="flex: 2;">
+              Complete Registration &rarr;
+            </button>
+          {% else %}
+            <button type="button" class="btn btn-secondary btn-disabled" style="flex: 2;" disabled>
+              Registration Unavailable
+            </button>
+          {% endif %}
+          <a href="{{ url_for('index') }}#upcoming-events" class="btn btn-secondary" style="flex: 1;">
+            Back to Events
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

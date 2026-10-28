@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}Administrator Dashboard — CollegeConnect{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+  <!-- Dashboard Top Header Row -->
+  <div class="admin-header-row">
+    <div class="admin-title-area">
+      <h1>Administrator Control Panel</h1>
+      <p>Overview of campus events, live seat allocations, and student bookings</p>
+    </div>
+    <div class="admin-header-actions">
+      <a href="{{ url_for('admin_create_event') }}" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Create New Event
+      </a>
+      <a href="{{ url_for('admin_export_csv') }}" class="btn btn-secondary" title="Export all registrations as CSV">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Export CSV
+      </a>
+    </div>
+  </div>
+
+  <!-- KPI Metric Cards (Matches Screenshot 2 #3) -->
+  <div class="kpi-grid">
+    <!-- Card 1: Total Events -->
+    <div class="kpi-card">
+      <div>
+        <div class="kpi-label">Total Events</div>
+        <div class="kpi-value">{{ kpis.total_events }}</div>
+      </div>
+      <div class="kpi-icon indigo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Card 2: Total Registrations -->
+    <div class="kpi-card">
+      <div>
+        <div class="kpi-label">Registrations</div>
+        <div class="kpi-value">{{ kpis.total_registrations }}</div>
+      </div>
+      <div class="kpi-icon blue">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Card 3: Total Available Seats -->
+    <div class="kpi-card">
+      <div>
+        <div class="kpi-label">Available Seats</div>
+        <div class="kpi-value">{{ kpis.total_available_seats }}</div>
+      </div>
+      <div class="kpi-icon emerald">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 14 14"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Card 4: Full or Closed Events -->
+    <div class="kpi-card">
+      <div>
+        <div class="kpi-label">Full / Closed</div>
+        <div class="kpi-value">{{ kpis.full_or_closed_events }}</div>
+      </div>
+      <div class="kpi-icon amber">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Event Management -->
+  <div class="table-wrapper">
+    <div class="table-header-bar">
+      <div>
+        <h2 class="table-header-title">Campus Events Management</h2>
+        <p style="font-size: 0.85rem; color: #64748B;">Modify capacities, open/close registrations, and track seat allocations</p>
+      </div>
+      <div>
+        <a href="{{ url_for('admin_create_event') }}" class="btn btn-sm btn-outline-primary">
+          + Add Event
+        </a>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Event Title</th>
+            <th>Category</th>
+            <th>Date &amp; Venue</th>
+            <th>Capacity</th>
+            <th>Registered</th>
+            <th>Remaining</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ev in events %}
+            <tr>
+              <td>
+                <div style="font-weight: 700; color: #1E1B4B;">{{ ev.title }}</div>
+                <small style="color: #64748B;">ID: #{{ ev.id }}</small>
+              </td>
+              <td>
+                <span class="category-tag {{ ev.category|lower }}" style="position: static; font-size: 0.7rem;">
+                  {{ ev.category }}
+                </span>
+              </td>
+              <td>
+                <div>{{ ev.display_date }}</div>
+                <small style="color: #64748B;">📍 {{ ev.venue }}</small>
+              </td>
+              <td style="font-weight: 600;">{{ ev.capacity }}</td>
+              <td style="font-weight: 700; color: #4F46E5;">{{ ev.registered_count }}</td>
+              <td>
+                {% if ev.available_seats == 0 %}
+                  <span style="color: #EF4444; font-weight: 700;">Full (0)</span>
+                {% elif ev.available_seats <= 10 %}
+                  <span style="color: #D97706; font-weight: 700;">{{ ev.available_seats }} left</span>
+                {% else %}
+                  <span style="color: #10B981; font-weight: 600;">{{ ev.available_seats }}</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if ev.is_open %}
+                  <span class="badge badge-open">Open</span>
+                {% else %}
+                  <span class="badge badge-closed">Closed</span>
+                {% endif %}
+              </td>
+              <td>
+                <div style="display: flex; gap: 0.4rem; align-items: center;">
+                  <!-- Edit Event Button -->
+                  <a href="{{ url_for('admin_edit_event', event_id=ev.id) }}" class="btn btn-sm btn-secondary" title="Edit Event Details">
+                    Edit
+                  </a>
+
+                  <!-- View Attendees Roster -->
+                  <a href="{{ url_for('admin_event_attendees', event_id=ev.id) }}" class="btn btn-sm btn-secondary" title="View Registered Attendees">
+                    Attendees ({{ ev.registered_count }})
+                  </a>
+
+                  <!-- Toggle Open/Closed -->
+                  <form action="{{ url_for('admin_toggle_event_status', event_id=ev.id) }}" method="POST" style="margin: 0;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm {% if ev.is_open %}btn-secondary{% else %}btn-outline-primary{% endif %}" title="Toggle Registration">
+                      {% if ev.is_open %}Close{% else %}Open{% endif %}
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Student Registrations Management -->
+  <div class="table-wrapper">
+    <div class="table-header-bar">
+      <div>
+        <h2 class="table-header-title">Student Registrations</h2>
+        <p style="font-size: 0.85rem; color: #64748B;">Search registered students, view departments, and export attendee rosters</p>
+      </div>
+
+      <!-- Filters & Search Form -->
+      <form action="{{ url_for('admin_dashboard') }}" method="GET" class="table-filters">
+        <!-- Event Filter Dropdown -->
+        <select name="filter_event" class="form-control" style="width: auto; padding: 0.45rem 0.85rem; font-size: 0.85rem;" onchange="this.form.submit()">
+          <option value="">All Events</option>
+          {% for ev in events %}
+            <option value="{{ ev.id }}" {% if filter_event == ev.id %}selected{% endif %}>
+              {{ ev.title }} ({{ ev.registered_count }})
+            </option>
+          {% endfor %}
+        </select>
+
+        <!-- Search Input -->
+        <div class="search-box">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text"
+                 name="q_student"
+                 value="{{ search_student }}"
+                 placeholder="Search student or email..."
+                 class="search-input"
+                 style="width: 210px; font-size: 0.85rem;">
+        </div>
+
+        {% if search_student or filter_event %}
+          <a href="{{ url_for('admin_dashboard') }}" class="btn btn-sm btn-secondary">
+            Reset
+          </a>
+        {% endif %}
+      </form>
+    </div>
+
+    {% if registrations %}
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Student Name</th>
+              <th>College Email</th>
+              <th>Department</th>
+              <th>Event Name</th>
+              <th>Registered At</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in registrations %}
+              <tr>
+                <td><span class="badge badge-ref">{{ r.reference_id }}</span></td>
+                <td style="font-weight: 700;">{{ r.student_name }}</td>
+                <td style="color: #4F46E5;">{{ r.email }}</td>
+                <td>
+                  <div>{{ r.department }}</div>
+                  <small style="color: #64748B;">{{ r.academic_year }}</small>
+                </td>
+                <td style="font-weight: 600; color: #1E1B4B;">{{ r.event_title }}</td>
+                <td style="color: #64748B; font-size: 0.825rem;">{{ r.display_registered_at }}</td>
+                <td>
+                  <span class="badge badge-open">✓ {{ r.status }}</span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <line x1="18" y1="8" x2="23" y2="13"></line>
+          <line x1="23" y1="8" x2="18" y2="13"></line>
+        </svg>
+        <h3 class="empty-state-title">No student registrations found</h3>
+        <p class="empty-state-text">
+          {% if search_student or filter_event %}
+            No registration records match the current filters. Try resetting the search or event selection.
+          {% else %}
+            No registrations have been submitted yet.
+          {% endif %}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

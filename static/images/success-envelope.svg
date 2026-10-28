@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" fill="none">
+  <defs>
+    <linearGradient id="envGrad" x1="0" y1="0" x2="240" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sparkles -->
+  <polygon points="35,45 37,50 42,51 38,54 39,59 35,56 31,59 32,54 28,51 33,50" fill="#FBBF24"/>
+  <polygon points="205,35 207,40 212,41 208,44 209,49 205,46 201,49 202,44 198,41 203,40" fill="#A78BFA"/>
+  <polygon points="215,115 216,118 219,119 217,121 218,124 215,122 212,124 213,121 211,119 214,118" fill="#F472B6"/>
+
+  <!-- Back Flap of Open Envelope -->
+  <polygon points="40,95 120,40 200,95" fill="#4338CA"/>
+
+  <!-- Paper / Letter emerging from envelope -->
+  <rect x="55" y="45" width="130" height="90" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <!-- Decorative text lines on letter -->
+  <rect x="75" y="105" width="90" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="85" y="115" width="70" height="4" rx="2" fill="#CBD5E1"/>
+
+  <!-- Big Checkmark Badge on Letter -->
+  <circle cx="120" cy="72" r="24" fill="url(#checkGrad)"/>
+  <path d="M110,72 L117,79 L132,64" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Envelope Front Body -->
+  <polygon points="40,95 200,95 200,165 40,165" fill="#6366F1"/>
+  <!-- Envelope folds -->
+  <polygon points="40,165 120,115 200,165" fill="#4F46E5"/>
+  <polygon points="40,95 120,135 40,165" fill="#4338CA" opacity="0.4"/>
+  <polygon points="200,95 120,135 200,165" fill="#4338CA" opacity="0.4"/>
+
+  <!-- Decorative plant leaf bottom right -->
+  <path d="M185,175 C185,155 205,150 215,145 C215,165 195,170 185,175 Z" fill="#3B82F6"/>
+  <path d="M190,175 C195,160 215,165 220,160 C215,175 200,175 190,175 Z" fill="#6366F1"/>
+</svg>
+

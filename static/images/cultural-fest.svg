@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <defs>
+    <linearGradient id="cultBg" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="50%" stop-color="#701A75"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <radialGradient id="spotLight" cx="200" cy="40" r="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F472B6" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#A855F7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#701A75" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#cultBg)"/>
+  <circle cx="200" cy="40" r="140" fill="url(#spotLight)"/>
+
+  <!-- Light beams -->
+  <polygon points="190,0 210,0 320,200 120,200" fill="#F472B6" opacity="0.12"/>
+  <polygon points="70,0 90,0 20,200 0,200" fill="#C084FC" opacity="0.15"/>
+  <polygon points="310,0 330,0 400,200 380,200" fill="#E879F9" opacity="0.15"/>
+
+  <!-- Microphone Centerpiece -->
+  <g transform="translate(180, 50)">
+    <!-- Mic Head -->
+    <rect x="12" y="10" width="16" height="26" rx="8" fill="#F3E8FF" stroke="#C084FC" stroke-width="2"/>
+    <line x1="12" y1="18" x2="28" y2="18" stroke="#A855F7" stroke-width="1.5"/>
+    <line x1="12" y1="26" x2="28" y2="26" stroke="#A855F7" stroke-width="1.5"/>
+    <line x1="20" y1="10" x2="20" y2="36" stroke="#A855F7" stroke-width="1.5"/>
+    <!-- Mic holder -->
+    <path d="M7,24 C7,38 33,38 33,24" stroke="#E9D5FF" stroke-width="2" fill="none"/>
+    <line x1="20" y1="38" x2="20" y2="52" stroke="#E9D5FF" stroke-width="3"/>
+    <line x1="10" y1="52" x2="30" y2="52" stroke="#E9D5FF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Musical Notes floating -->
+  <path d="M110,90 L110,65 L135,60 L135,85 M110,75 L135,70" stroke="#F472B6" stroke-width="2" fill="none"/>
+  <circle cx="106" cy="92" r="5" fill="#F472B6"/>
+  <circle cx="131" cy="87" r="5" fill="#F472B6"/>
+
+  <path d="M285,85 L285,60 L305,65" stroke="#FBBF24" stroke-width="2" fill="none"/>
+  <circle cx="281" cy="87" r="5" fill="#FBBF24"/>
+
+  <!-- Crowd Silhouette -->
+  <path d="M0,200 Q40,165 70,185 Q110,160 140,180 Q180,155 210,180 Q250,150 280,175 Q320,155 360,180 Q390,165 400,185 L400,200 L0,200 Z" fill="#18022B" opacity="0.95"/>
+  <path d="M40,175 C45,150 48,150 53,175 Z" fill="#18022B"/>
+  <path d="M150,165 C155,145 158,145 163,165 Z" fill="#18022B"/>
+  <path d="M260,160 C265,140 268,140 273,160 Z" fill="#18022B"/>
+  <path d="M340,165 C345,145 348,145 353,165 Z" fill="#18022B"/>
+
+  <text x="200" y="145" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">CULTURAL NIGHT</text>
+</svg>
+

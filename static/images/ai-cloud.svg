@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <defs>
+    <linearGradient id="aiBg" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="60%" stop-color="#4338CA"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#aiBg)"/>
+
+  <!-- Neural Network constellation lines -->
+  <line x1="80" y1="80" x2="150" y2="50" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="80" y1="80" x2="140" y2="120" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="150" y1="50" x2="250" y2="50" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="140" y1="120" x2="260" y2="120" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="250" y1="50" x2="320" y2="80" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="260" y1="120" x2="320" y2="80" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="150" y1="50" x2="260" y2="120" stroke="#C084FC" stroke-width="1" opacity="0.5"/>
+  <line x1="140" y1="120" x2="250" y2="50" stroke="#C084FC" stroke-width="1" opacity="0.5"/>
+
+  <!-- Center Cloud Motif -->
+  <path d="M175,100 C165,100 155,90 160,78 C165,65 185,62 195,70 C202,58 225,58 232,70 C242,70 250,78 248,88 C255,92 255,100 245,105 C245,108 235,110 230,105 C222,112 185,112 175,100 Z" fill="#EEF2FF" opacity="0.95"/>
+
+  <!-- Neural nodes -->
+  <circle cx="80" cy="80" r="6" fill="#38BDF8"/>
+  <circle cx="150" cy="50" r="7" fill="#818CF8"/>
+  <circle cx="140" cy="120" r="7" fill="#818CF8"/>
+  <circle cx="250" cy="50" r="7" fill="#A855F7"/>
+  <circle cx="260" cy="120" r="7" fill="#A855F7"/>
+  <circle cx="320" cy="80" r="6" fill="#F472B6"/>
+
+  <text x="200" y="160" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="20" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">AI &amp; CLOUD WORKSHOP</text>
+  <text x="200" y="180" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="11" fill="#C7D2FE" text-anchor="middle" letter-spacing="2">NEXT-GEN INTELLIGENCE</text>
+</svg>
+
